@@ -124,3 +124,20 @@ await project.validate()
 
 await project.validateOnlySomeStuff()
 ```
+
+### Without classes or only static methods
+
+```js
+var project = Project.get(query)
+
+await Project.update(query, values)
+await Project.delete(query)
+
+// This throws
+await Project.validateOnCreate(values)
+
+await Project.validateOnUpdate(query, values)
+
+// Save immediately
+var project = await Project.create(values)
+```
