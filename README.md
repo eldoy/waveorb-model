@@ -103,5 +103,24 @@ var project = new Project({ query, values })
 
 // Returns 'true' or 'false'
 var validated = await project.update({ validate: true })
+```
 
+### Traditional ORM
+
+We could also get rid of this `query` and `values` thing:
+
+```js
+// Find by id
+var project = Project.get(query.id)
+var project = Project.first(query.id)
+var project = Project.last(query.id)
+var project = Project.get(query)
+
+await project.update(values)
+await project.delete(query)
+
+var project = new Project(values)
+await project.validate()
+
+await project.validateOnlySomeStuff()
 ```
