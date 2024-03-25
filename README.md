@@ -163,4 +163,35 @@ await project.validate()
 await project.create()
 ```
 
-The difference is that we can bake in defaults like sorting
+The difference is that we can bake in defaults like sorting.
+
+Is this the cleanest?
+
+```js
+var project = await app.models.project.create(values)
+
+// Throws, like before, only in APIs
+await $.validate({})
+
+// Add this to run validations, supports multiple
+await $.validations(['createProject'])
+await $.validations('createProject')
+
+// Calling the validation directly doesn't throw, like from a script
+var validation = await app.validations.createProject(values)
+if (validation.isValid) {
+  var project = await app.models.project.create(values)
+} else {
+  // Handle errors
+  validation.errors
+}
+```
+
+This last one uses a validation object, which can be useful.
+
+Would it be nice to add some more functions to mongowave?
+
+1. Return the stored object on create, update and delete
+2. Find last, first
+3. Default sort, per collection
+4. upsert function, create if not exist
