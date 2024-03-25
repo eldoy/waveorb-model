@@ -141,3 +141,26 @@ await Project.validateOnUpdate(query, values)
 // Save immediately
 var project = await Project.create(values)
 ```
+
+This latter one is almost the same as what we have now:
+
+```js
+var project = await db('project').create(values)
+
+var project = await Project.create(values)
+
+var project = await Project.create(values)
+```
+
+
+Alternative syntax:
+```js
+var project = await Project($).validate().create()
+
+// Same as
+var project = Project($)
+await project.validate()
+await project.create()
+```
+
+The difference is that we can bake in defaults like sorting
